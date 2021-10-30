@@ -1,0 +1,20 @@
+{% extends "home/header.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+{% comment %}
+ The form template was provided from the django documentation
+https://docs.djangoproject.com/en/1.10/topics/forms/
+{% endcomment %}
+<form class="form-horizontal" action="" method="post">
+    {% csrf_token %}
+    {% include 'home/form-template.html' %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="bRed btn" role="button">Register</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

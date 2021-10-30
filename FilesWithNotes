@@ -1,0 +1,6 @@
+These files are configured specifically for the live site
+so don't reload them only make changes if necessary
+Exceptions:
+
+FlookMeatMarket/urls.py
+FlookMeatMarket/settings.py

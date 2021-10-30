@@ -1,0 +1,26 @@
+{% load staticfiles%}
+
+<div class="form-group">
+    <label class="control-label col-sm-2"><label for="id_OpenSunday">Sunday Hours:</label></label>
+    <div class="input-group col-sm-2">
+
+        <span class="input-group-addon"><input {% if info.OpenSunday %}checked {% endif %} id="id_OpenSunday"
+                                               name="id_OpenSunday"
+                                               type="checkbox" value="1"/></span>
+
+        <span><label class="norad form-control"><label for="id_SundayStart">Start: <span class="text-danger small unstyled">{{ error_SS}}</span></label></label>
+
+        <input class="norad form-control" id="id_SundayStart" name="id_SundayStart" type="time"
+               value="{{ sundaySS }}"
+               required/></span>
+
+        <span><label class="norad form-control"><label for="id_SundayEnd">End: <span class="text-danger small unstyled">{{ error_SE}}</span></label></label>
+
+        <input class="norad form-control" id="id_SundayEnd" name="id_SundayEnd" type="time" value="{{ sundaySE  }}"
+               required/>
+    </span>
+    </div>
+
+</div>
+
+

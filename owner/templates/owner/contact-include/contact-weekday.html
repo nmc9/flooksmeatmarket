@@ -1,0 +1,48 @@
+
+<div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <span class="text-danger small unstyled">{{ error_VOpenFromWD }}</span>
+    </div>
+        <label class="control-label col-sm-2"><label for="id_OpenFromWD">Weekday Start: </label></label>
+        <div class="col-sm-10"><select id="id_OpenFromWD" name="id_OpenFromWD" required>
+            <option value="Monday"{% if info.OpenFromWD == 'Monday' %} selected{% endif %}>Monday</option>
+            <option value="Tuesday"{% if info.OpenFromWD == 'Tuesday' %} selected{% endif %}>Tuesday</option>
+            <option value="Wednesday"{% if info.OpenFromWD == 'Wednesday' %} selected{% endif %}>Wednesday</option>
+            <option value="Thursday"{% if info.OpenFromWD == 'Thursday' %} selected{% endif %}>Thursday</option>
+            <option value="Friday"{% if info.OpenFromWD == 'Friday' %} selected{% endif %}>Friday</option>
+        </select></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        <span class="text-danger small unstyled">{{ error_VOpenUntilWD }}</span>
+    </div>
+        <label class="control-label col-sm-2"><label for="id_OpenFromWD">Weekday End: </label></label>
+        <div class="col-sm-10"><select id="id_OpenUntilWD" name="id_OpenUntilWD" required>
+            <option value="Monday"{% if info.OpenUntilWD == 'Monday' %} selected{% endif %}>Monday</option>
+            <option value="Tuesday"{% if info.OpenUntilWD == 'Tuesday' %} selected{% endif %}>Tuesday</option>
+            <option value="Wednesday"{% if info.OpenUntilWD == 'Wednesday' %} selected{% endif %}>Wednesday</option>
+            <option value="Thursday"{% if info.OpenUntilWD == 'Thursday' %} selected{% endif %}>Thursday</option>
+            <option value="Friday"{% if info.OpenUntilWD == 'Friday' %} selected{% endif %}>Friday</option>
+        </select></div>
+    </div>
+<div class="form-group">
+
+    <label class="control-label col-sm-2">Weekday Hours:</label>
+    <div class="input-group col-sm-2">
+        <div class="col-sm-offset-2 col-sm-10">
+            <span class="text small unstyled">ex: 12:30, ex: 23:59</span>
+        </div>
+        <span><label class="norad form-control"><label for="id_WeekdayStart">Start: <span class="text-danger small unstyled">{{ error_weekS }}</span></label></label>
+
+        <input class="norad form-control" id="id_WeekdayStart" name="id_WeekdayStart" type="time"
+               value="{{ weekdayS }}"
+               required/></span>
+
+        <span><label class="norad form-control"><label for="id_WeekdayEnd">End: <span class="text-danger small unstyled">{{ error_weekE}}</span></label></label>
+
+        <input class="norad form-control" id="id_WeekdayEnd" name="id_WeekdayEnd" type="time" value="{{ weekdayE  }}"
+               required/>
+    </span>
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+{% extends "home/header.html" %}
+{% block title %}Map{% endblock %}
+{% block map %}
+
+{% comment %}
+The code for the google maps API and the accompanying CSS was provided from
+https://developers.google.com/maps/documentation/javascript/tutorial
+There was only a few changes to add a marker to the lat/long of the store
+{% endcomment %}
+
+<h2 id="maph2" class="center-block">Our store is located at {{ address }}</h2>
+<div id="map"></div>
+<script>
+      function initMap() {
+        var myLatLng = {lat: 41.23081290584941, lng: -77.00174421072006};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 18,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Flooks Meat Market'
+        });
+      }
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSbOjkDHorrBbv2pnUJ8Imv_y6c9VJFFA&callback=initMap"
+        async defer></script>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% comment %}
+ The form template was provided from the django documentation
+https://docs.djangoproject.com/en/1.10/topics/forms/
+{% endcomment %}
+{% for field in form %}
+<div class="form-group">
+
+    <label class="control-label col-sm-2">{{ field.label_tag}}</label>
+    <div class="col-sm-10">{{ field }}</div>
+</div>
+{% endfor %}

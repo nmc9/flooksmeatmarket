@@ -1,0 +1,37 @@
+{% extends "basket/basketListView.html" %}
+
+{% block basketContent %}
+<!--suppress XmlDuplicatedId -->
+{% with h='hidden-xs' v='col-xs-6' %}
+<li class="psText col-md-3 col-sm-3 col-xs-6">{{basketz.product }}</li>
+<li class="psText col-md-3 col-sm-3 {% if column == 'Location' %} {{ v }}{% else %} {{ h }} {% endif %}">
+    {{basketz.product.location }}
+</li>
+<li class="psText form-group col-md-3 col-sm-3 {% if column == 'Amount' %} {{ v }}{% else %} {{ h }} {% endif %}">
+
+    {%if basketz.product.byPound%}
+    <!-- This product is sold by the pound and can be any increment of .5 lbs -->
+
+    <input class="psText inputQuantity bgcBlue" id="{{basketz.id}}quantity" name="{{basketz.id}}quantity"
+           value="{{ basketz.quantity }}"
+           type="number" min="0" step="0.5"
+    >
+    <label class="psText " for="{{basketz.id}}quantity">lbs</label>
+    <div>
+        <span class="text small unstyled">*Actual lbs may vary</span>
+    </div>
+    {% else %}
+    <!-- This product is not sold by pound and must be a whole number QTY:-->
+    <label class="psText" for="{{basketz.id}}quantity">QTY: </label>
+    <input class="psText bgcBlue inputQuantity" id="{{basketz.id}}quantity" name="{{basketz.id}}quantity"
+           value="{{ basketz.quantity|floatformat:0 }}"
+           type="number" min="0"
+    >
+    {% endif %}
+
+</li>
+<li class="psText col-md-3 col-sm-3 {% if column == 'Price' %} {{ v }}{% else %} {{ h }} {% endif %}">
+    {% if basketz.product.price %}${{ basketz.product.price }}{% else %}N/A{% endif %}
+</li>
+{% endwith %}
+{% endblock %}

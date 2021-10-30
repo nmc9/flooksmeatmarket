@@ -1,0 +1,18 @@
+{% extends 'product/productDetail.html' %}
+
+{% block add-button%}
+    <a class="bRed btn" href="{% url 'product:product-add' %}" role="button">Add Product</a>
+{% endblock %}
+
+{% block Employee-button%}
+    <form class="form-inline" action="{% url 'product:product-update' product.id %}">
+    {% csrf_token %}
+    <button role=button class="bRed btn">Edit</button>
+</form>
+
+    <form class="form-inline" action="{% url 'product:product-delete' product.id %}" method="post">
+    {% csrf_token %}
+    <button role="button" class="bRed btn">Delete</button>
+</form>
+{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends "home/header.html" %}
+{% block title %}Owner Page{% endblock %}
+{% load static %}
+{% block content %}
+
+
+<h1>This is the owner page</h1>
+<h4>Do not allow anyone else access to these owner pages</h4>
+
+<div>
+    <a class="bRed btn" role="button" href="{% url 'owner:CompanyInfo' %}">Update Company Info</a>
+    <a class="bRed btn" role="button" href="{% url 'owner:update-user' %}">View Customers and Employees</a>
+    <a class="bRed btn" href="{% static 'home/files/Owner_Guide.pdf' %}" role="button" download>Owner Guide</a>
+</div>
+{% endblock%}

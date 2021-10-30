@@ -1,0 +1,144 @@
+{% load static %}
+<div class="nav-wrapper">
+    <div id="nav">
+        <nav id="nav_bar" class="navbar navbar-inverse navbar-static-top" style="z-index: 100 !important;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{% url 'home:home' %}" role="button">Home</a>
+                </div>
+
+                <!-- Seperate navbar section form the header of the navbar -->
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+
+                        <!-- Begin split dropdown menu -->
+                        <li>
+                            <form class="btn-group navbar-btn" method="get" action="{% url 'product:index'%}">
+                                <button type="submit" id="btnWithDrpd" class="btn btn-link">Products</button>
+                                <button data-toggle="dropdown" class="btn btn-link dropdown-toggle"><span
+                                        class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu">
+                                        <a class="test" tabindex="-1" href="{% url 'product:product-search' 'AL' %}"
+                                           role="button">Meats
+                                            <span
+                                                    class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a tabindex="-1" href="{% url 'product:product-search' 'BF' %}"
+                                                   role="button">Beef</a>
+                                            </li>
+                                            <li><a tabindex="-1" href="{% url 'product:product-search' 'PK' %}"
+                                                   role="button">Pork</a>
+                                            </li>
+                                            <li><a tabindex="-1"
+                                                   href="{% url 'product:product-search' 'PT' %}"
+                                                   role="button">Poultry</a></li>
+                                            <li><a tabindex="-1" href="{% url 'product:product-search' 'SM' %}"
+                                                   role="button">Specialty
+                                                Meats</a></li>
+                                            <li class="divider"></li>
+                                            <li><a tabindex="-1" href="{% url 'product:product-search' 'AL' %}"
+                                                   role="button">All</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a tabindex="-1" href="{% url 'product:product-search' 'DI' %}" role="button">Deli</a>
+                                    </li>
+
+                                    <li><a tabindex="-1" href="{% url 'product:product-search' 'GS' %}" role="button">Groceries</a>
+                                    </li>
+
+                                </ul>
+                            </form>
+                        </li>
+                        <li><a href="{% url 'basket:index'%}" role="button">Basket</a></li>
+                        <li><a href="{% url 'contact:index' %}" role="button">Contact Us</a></li>
+                        <li><a href="{% url 'direction:index'%}" role="button">Map</a></li>
+                        <li><a href="{% url 'home:FAQ' %}" role="button">FAQ</a></li>
+
+                        {% for group in user.groups.all %}
+                        {% ifequal group.name 'Employee' %}
+                        <li><a href="{% static 'home/files/Employee_Guide.pdf' %}" role="button" download>Employee Guide</a></li>
+                        {% endifequal %}
+                        {% endfor %}
+                        {% for group in user.groups.all %}
+                        {% ifequal group.name 'Owner' %}
+                        <li><a href="{% url 'owner:index' %}" role="button">Owner Page</a></li>
+
+
+                        {% endifequal %}
+                        {% endfor %}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated and user.is_active %}
+                        <li><a href="{% url 'home:logout'%}" role="button"><span
+                                class="glyphicon glyphicon-log-out"></span> Log
+                            Out</a>
+                        </li>
+
+                        {% else %}
+                        <li><a href="{% url 'home:login'%}" role="button"><span
+                                class="glyphicon glyphicon-log-in"></span> Login</a>
+                        </li>
+                        <li><a href="{% url 'home:register'%}" role="button"><span
+                                class="glyphicon glyphicon-user"></span> Sign
+                            Up</a></li>
+
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<script>
+{% comment %}
+The code for the navbar button and the CSS involved is retrieved a lot from
+http://stackoverflow.com/questions/35107779/how-do-i-dynamically-adjust-css-using-javascript-for-sub-menu-and-sub-sub-menu-i/35107926
+{% endcomment %}
+$(document).ready(function(){
+    $('.dropdown-submenu a.test').on("click", function(e){
+        $(this).next('ul').toggle();
+        e.stopPropagation();
+        e.preventDefault();
+    });
+});
+{% comment %}
+The code for the navbar attaching to the top of the screen and the CSS involved is retrieved a lot from
+http://stackoverflow.com/questions/20276166/how-do-i-make-my-navbar-change-css-class-upon-scrolling-past-an-anchor-point
+{% endcomment %}
+$(document).ready(function() {
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > $('#hdrDiv').outerHeight()) {
+            $('#nav_bar').addClass('scrollnavbar');
+        }
+        if ($(window).scrollTop() < $('#hdrDiv').outerHeight() + 1) {
+            $('#nav_bar').removeClass('scrollnavbar');
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="Flook, Flook's, Flooks, Meat Market, Flook's Meat Market,
+	FlooksMeatMarket, Flooks Meat Market, South Williamsport PA, Deli, Butcher Shop, Local " />.
+    <title>{% block title %}Flook's Meat Market{% endblock%}</title>
+    {% load staticfiles %}
+	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'home/css/override.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+{% comment %}
+    All the text and images that relate to the Meat Market were provided by Antonia Flook.
+{% endcomment %}
+<body class="bgcBlue">
+<div class="page-header" style="margin-top:0px;">
+    <div id="hdrDiv" style="background-color:#8299AE;">
+        <img class="center-block img-responsive"
+             src="{% static 'home/img/FMM2.png' %}"
+             alt="Store Front Image"
+             style="max-height:200px; border: 1px solid #423244;">
+    </div>
+
+    {% include "home/navbar.html" %}
+</div>
+
+<div class="container-fluid">
+    {% block content %}
+
+    {% endblock %}
+</div>
+{% block map %}
+{% endblock %}
+
+
+{% comment %}
+This footer and the CSS in the custom CSS page is heavily influenced by the footer of the project in the
+https://www.youtube.com/watch?v=FNQxxpM1yOs
+{% endcomment%}
+<footer id="idfooter" class="container-fluid">
+    <div class="container-fluid text-right text-uppercase" style='margin-right:20px'>
+        <p><a href="{% url 'contact:index' %}">Contact Us</a> | <a
+                href="https://www.facebook.com/pages/Flooks-Meats-Locker-Plant/151919561516532"
+                target="D">Facebook</a> | <a href="{% url 'direction:index'%}">Map</a> | <a
+                href="{% static 'home/files/Acceptable_Use_Policy.pdf' %}" role="button" download>AUP</a>
+        </p>
+    </div>
+</footer>
+
+
+</body>
+</html>

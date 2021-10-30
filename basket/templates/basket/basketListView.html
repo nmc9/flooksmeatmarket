@@ -1,0 +1,99 @@
+{% extends "home/header.html" %}
+{% block title %}Basket{% endblock %}
+{% block content %}
+<div class="header">
+    <h1 id="redcolor" class="redcolor">Basket: {{ user.username }}</h1>
+</div>
+
+
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+
+{% if user.basket.orderline_set.count != 0 %}
+<form class="form" action="{% url 'basket:edit' user.id %}" method="post">
+    {% csrf_token %}
+    <h6 class="text" style="font-size:16px;">Set Product Amount to 0 to remove from basket</h6>
+
+    <div class="btn-group" style="margin-bottom:10px">
+        <a class="psText bRed btn btn-defualt hidden-sm hidden-md hidden-lg"
+           href="{% url 'basket:detail-column' user.id 'Amount' %}">Amount</a>
+        <a class="psText bRed btn hidden-sm hidden-md hidden-lg"
+           href="{% url 'basket:detail-column' user.id 'Location' %}">Location</a>
+        <a class="psText bRed btn hidden-sm hidden-md hidden-lg"
+           href="{% url 'basket:detail-column' user.id 'Price' %}">Price</a>
+    </div>
+    <div class="basketBorder">
+        <div class="col-md-offset-6 col-md-3 col-sm-offset-4 col-sm-8 col-xs-offset-6 col-xs-6   ">
+            <span class="text-danger small unstyled">{{ error }}</span>
+        </div>
+        <div class="container">
+
+            <ul class="list-inline row">
+                {% with h='hidden-xs' v='col-xs-6' %}
+                <li class="pText col-md-3 col-sm-3 col-xs-6"><strong>Product Name</strong></li>
+
+                <li class="pText col-md-3 col-sm-3 {% if column == 'Location' %} {{ v }}{% else %} {{ h }} {% endif %}">
+                    <strong>Product Location</strong></li>
+                <li class="pText col-md-3 col-sm-3 {% if column == 'Amount' %} {{ v }}{% else %} {{ h }} {% endif %}"><strong>Product
+                    Amount</strong></li>
+                <li class="pText col-md-3 col-sm-3 {% if column == 'Price' %} {{ v }}{% else %} {{ h }} {% endif %}"><strong>Product
+                    Price</strong></li>
+                {% endwith %}
+            </ul>
+        </div>
+        <div class="container">
+            {% for basketz in user.basket.orderline_set.all %}
+            <fieldset>
+
+                <ul class="list-inline row">
+                    {% block basketContent %}
+
+                    {% endblock %}
+                </ul>
+
+            </fieldset>
+            <hr/>
+            {% endfor %}
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-offset-8 col-sm-4-">
+                    <span class="text-danger small unstyled">{{ error_date }}</span>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-offset-8 col-sm-4">
+                    <span class="text small unstyled">format month/day/year ex:01/31/16</span>
+                </div>
+            </div>
+            <div class="row">
+                <label class="control-label col-sm-8 text-right"><label for="id_Dateinput">If you want to specify
+                    a date we can try
+                    to have it ready for you:</label></label>
+                <div class=" col-sm-4  pull-right"><input class="bgcBlue" value="{{ user.basket.Date|date:'m/d/y' }}"
+                                                          id="id_Dateinput"
+                                                          name="id_Dateinput"
+                                                          type="text"/></div>
+            </div>
+
+            {% if save %}
+            <div class="row">
+                <div class=" col-sm-4  pull-right">
+                    <input style="margin:5px; margin-top:10px;" class="bRed btn" role="button" type="submit"
+                           value="Save">
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</form>
+{% else %}
+<h3 class=" psText col-xs-offset-1 text-danger">Basket Is Empty</h3>
+{% endif %}
+
+
+{% endblock %}

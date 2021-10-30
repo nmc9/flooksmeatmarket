@@ -1,0 +1,101 @@
+{% extends "home/header.html" %}
+{% block title %}Update User{% endblock %}
+{% block content %}
+<h1>Owners</h1>
+{% if all_owner %}
+<ul class=" Ilist list-unstyled">
+    {% for all_ in all_owner%}
+    <li><p class="pText"> {{ all_.username }}</p></li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<h4 class="Ilist">Owner Name Not Found</h4>
+{% endif %}
+<h1>Customers</h1>
+{% if all_customer %}
+<ul class="Ilist list-unstyled">
+    {% for all_ in all_customer%}
+    <li>
+        <ol class="list-inline">
+            <li>
+                <p class="pText">{{ all_.username }}</p>
+            </li>
+            <li>
+                <form class="form-inline" method="post" action="{% url 'owner:makeEmployee' all_.id %}">
+                    {% csrf_token %}
+                    <input class="bRed form-control" type="submit" value="Make Employee">
+
+                </form>
+            </li>
+            <li>
+                <form class="form-inline" method="post" action="{% url 'owner:deactivateUser' all_.id %}">
+                    {% csrf_token %}
+                    <input class="bRed form-control" type="submit" value="Deactivate User">
+                </form>
+            </li>
+        </ol>
+    </li>
+    <li><hr/></li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<h4>No Customers Found</h4>
+{% endif %}
+
+<h1>Employees</h1>
+{% if all_employee %}
+<ul class="Ilist list-unstyled">
+    {% for all_ in all_employee%}
+    <li>
+        <ol class="list-inline">
+            <li>
+                <p class="pText">{{ all_.username }}</p>
+            </li>
+            <li>
+                <form class="form-inline" method="post" action="{% url 'owner:removeEmployee' all_.id %}">
+                    {% csrf_token %}
+                    <input class="bRed form-control" type="submit" value="Remove Employee">
+                </form>
+            </li>
+            <li>
+                <form class="form-inline" method="post" action="{% url 'owner:deactivateUser' all_.id %}">
+                    {% csrf_token %}
+                    <input class="bRed form-control" type="submit" value="Deactivate User">
+                </form>
+            </li>
+        </ol>
+        <li><hr/></li>
+        {% endfor %}
+</ul>
+
+{% else %}
+<h4 class="Ilist">No Employees Found</h4>
+{% endif %}
+
+
+<h1>Inactive Users</h1>
+{% if all_inactive %}
+<ul class="Ilist list-unstyled">
+    {% for all_ in all_inactive%}
+    <li>
+        <ol class="list-inline">
+            <li>
+                <p>{{ all_.username }}</p></li>
+            <li>
+                <form class="form-inline" method="post" action="{% url 'owner:reactivate' all_.id %}">
+                    {% csrf_token %}
+                    <input class="bRed form-control" type="submit" value="Reactivate">
+                </form>
+            </li>
+        </ol>
+    </li>
+    <li><hr/></li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<h4 class="Ilist">No Employees Found</h4>
+{% endif %}
+{% endblock %}

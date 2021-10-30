@@ -1,0 +1,20 @@
+{% extends "home/header.html" %}
+{% block title%}FAQ{% endblock %}
+{% load static %}
+{% block content %}
+<h1>Frequently Asked Questions</h1>
+<h3>If you still need help please check out the User Guide</h3>
+<a class="bRed btn" href="{% static 'home/files/User_Guide.pdf' %}" role="button" download>Download User Guide</a>
+
+<h2>What is a basket?</h2>
+<p class="pText">A basket is a feature that you can use to make a shopping list for when you come into the store. You
+    can’t place an order online but you can’t set the basket up with a date you would like to pick up the products in
+    your basket.</p>
+<h2>What is Location?</h2>
+<p class="pText">The location that the basket refers to is in the store. There locations are the Freezer, the Cooler, in
+    the Beef/Chicken Case, Pork Case, Cold Meat Case, and the Snack Rack. If the location is Ask then you will have to
+    ask an employee in store to get it for you.</p>
+<h2>Why is there no Price?</h2>
+<p class="pText"> We can’t display some prices because the price changes depending on the market. If you would still
+    like to get a pricing please call or email us and we will give you the current price.</p>
+{% endblock %}
